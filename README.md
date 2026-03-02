@@ -10,11 +10,9 @@ If you manually switch accounts on a page, the extension won't interfere — it 
 
 ## Install
 
-1. Clone or download this repository.
-2. Open Firefox and navigate to `about:debugging#/runtime/this-firefox`.
-3. Click **Load Temporary Add-on…** and select `manifest.json`.
-
-> Temporary add-ons are removed when Firefox closes. For persistent installation, the extension must be signed via [addons.mozilla.org](https://addons.mozilla.org).
+1. Go to [the Add-on Page](https://addons.mozilla.org/en-US/developers/addon/38d856a4392942368780/versions)
+2. Click on the latest version and then click on the `.xpi` file to download it.
+3. Firefox will ask you whether you want to install the extension. Say Yes. If it doesn't, you can double-click the `.xpi` file to install it.
 
 ## Setup
 
