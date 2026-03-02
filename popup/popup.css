@@ -1,0 +1,102 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  width: 340px;
+  font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #202124;
+  padding: 12px;
+}
+
+h1 { font-size: 16px; margin-bottom: 10px; }
+
+h2 {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #5f6368;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+section { margin-bottom: 14px; }
+
+/* Shared form elements */
+select, input {
+  flex: 1;
+  padding: 5px 6px;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  font-size: 12px;
+  min-width: 0;
+}
+
+button {
+  padding: 5px 10px;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  background: #1a73e8;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  white-space: nowrap;
+}
+button:hover { background: #1765cc; }
+
+/* Account list */
+ul { list-style: none; margin-bottom: 6px; }
+
+ul li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px solid #e8eaed;
+}
+ul li span { flex: 1; }
+ul li button {
+  background: none; border: none; color: #d93025;
+  cursor: pointer; font-size: 13px; padding: 2px 6px;
+}
+ul li button:hover { text-decoration: underline; }
+
+/* Import button */
+#import-btn {
+  width: 100%;
+  margin-bottom: 6px;
+  background: #fff;
+  color: #1a73e8;
+  border-color: #1a73e8;
+}
+#import-btn:hover { background: #e8f0fe; }
+#import-btn:disabled { opacity: 0.6; cursor: default; }
+
+.error { color: #d93025; font-size: 12px; margin-bottom: 6px; }
+
+/* Override rows */
+#overrides-list { margin-bottom: 6px; }
+
+.override-row {
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid #e8eaed;
+}
+.override-row .service-name { flex: 0 0 70px; font-weight: 500; font-size: 12px; }
+.override-row select { flex: 1; }
+.override-row button {
+  flex: 0 0 auto; margin-left: 4px;
+  background: none; border: none; color: #d93025;
+  padding: 2px 6px; font-size: 13px;
+}
+.override-row button:hover { text-decoration: underline; background: none; }
+
+/* Footer */
+hr { border: none; border-top: 1px solid #e8eaed; margin: 10px 0; }
+
+button.danger {
+  width: 100%;
+  background: #fff;
+  color: #d93025;
+  border-color: #d93025;
+}
+button.danger:hover { background: #fce8e6; }
