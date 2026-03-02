@@ -34,6 +34,14 @@ Use **Add service…** to override specific services. For example, set Gmail to 
 
 Supported services: Calendar, Chat, Contacts, Docs, Drive, Groups, Keep, Gmail, Maps, Meet, Photos, Sheets, Slides.
 
+## Dev
+
+Zip the extension to submit it in the Firefox Add-on Store:
+
+```bash
+zip -r account-switcher.zip manifest.json background.js popup/ icons/
+```
+
 ## Permissions
 
 - **`webRequest` / `webRequestBlocking`** — intercept and redirect requests before they reach Google.
