@@ -1,10 +1,10 @@
 /* Google Account Switcher — popup script */
 
 const SERVICE_LABELS = {
-  calendar: "Calendar", chat: "Chat", contacts: "Contacts", docs: "Docs",
-  drive: "Drive", groups: "Groups", keep: "Keep", mail: "Gmail",
-  maps: "Maps", meet: "Meet", photos: "Photos", sheets: "Sheets",
-  slides: "Slides"
+  business: "Business", calendar: "Calendar", chat: "Chat", "cloud-console": "Cloud Console",
+  contacts: "Contacts", docs: "Docs", drive: "Drive", groups: "Groups",
+  keep: "Keep", mail: "Gmail", maps: "Maps", meet: "Meet", photos: "Photos",
+  sheets: "Sheets", slides: "Slides"
 };
 
 const $ = (id) => document.getElementById(id);
@@ -14,24 +14,27 @@ const importError = $("import-error");
 const defaultSelect = $("default-select");
 const overridesList = $("overrides-list");
 const serviceSelect = $("override-service");
+const enabledToggle = $("enabled-toggle");
 
 let accounts = [];
 let defaultAccount = null;
 let overrides = {};
+let enabled = true;
 
 // --- Storage ---
 
 function save() {
-  browser.storage.local.set({ accounts, defaultAccount, overrides }).then(() =>
+  browser.storage.local.set({ accounts, defaultAccount, overrides, enabled }).then(() =>
     browser.runtime.sendMessage({ type: "configUpdated" })
   );
 }
 
 function load() {
-  browser.storage.local.get(["accounts", "defaultAccount", "overrides"]).then((d) => {
+  browser.storage.local.get(["accounts", "defaultAccount", "overrides", "enabled"]).then((d) => {
     accounts = d.accounts || [];
     defaultAccount = d.defaultAccount ?? null;
     overrides = d.overrides || {};
+    enabled = d.enabled !== false;
     render();
   });
 }
@@ -39,6 +42,7 @@ function load() {
 // --- Render ---
 
 function render() {
+  enabledToggle.checked = enabled;
   renderAccounts();
   renderSelect(defaultSelect, defaultAccount, "None");
   renderOverrides();
@@ -151,6 +155,7 @@ function removeAccount(email) {
 
 // --- Events ---
 
+enabledToggle.onchange = () => { enabled = enabledToggle.checked; save(); };
 importBtn.onclick = importAccounts;
 defaultSelect.onchange = () => { defaultAccount = defaultSelect.value || null; save(); };
 serviceSelect.onchange = () => {

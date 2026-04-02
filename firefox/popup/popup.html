@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="popup.css" />
+    </head>
+    <body>
+        <h1>Account Switcher</h1>
+
+        <!-- Global toggle -->
+        <section id="enabled-section">
+            <label class="toggle-row">
+                <span>Redirect enabled</span>
+                <input type="checkbox" id="enabled-toggle" checked />
+            </label>
+        </section>
+
+        <!-- Accounts list -->
+        <section id="accounts-section">
+            <h2>Accounts</h2>
+            <button id="import-btn">Import from Google</button>
+            <p id="import-error" class="error" hidden></p>
+            <ul id="accounts-list"></ul>
+        </section>
+
+        <!-- Default account -->
+        <section id="default-section">
+            <h2>Default Account</h2>
+            <select id="default-select">
+                <option value="">None</option>
+            </select>
+        </section>
+
+        <!-- Per-service overrides -->
+        <section id="overrides-section">
+            <h2>Service Overrides</h2>
+            <div id="overrides-list"></div>
+
+            <div class="form-row">
+                <select id="override-service">
+                    <option value="">Add service…</option>
+                    <option value="mail">Gmail</option>
+                    <option value="cloud-console">Cloud Console</option>
+                    <option value="business">Business</option>
+                    <option value="drive">Drive</option>
+                    <option value="docs">Docs</option>
+                    <option value="sheets">Sheets</option>
+                    <option value="slides">Slides</option>
+                    <option value="calendar">Calendar</option>
+                    <option value="maps">Maps</option>
+                    <option value="photos">Photos</option>
+                    <option value="meet">Meet</option>
+                    <option value="chat">Chat</option>
+                    <option value="contacts">Contacts</option>
+                    <option value="keep">Keep</option>
+                    <option value="groups">Groups</option>
+                </select>
+            </div>
+        </section>
+
+        <hr />
+        <button id="reset-btn" class="danger">Reset All Settings</button>
+
+        <script src="popup.js"></script>
+    </body>
+</html>

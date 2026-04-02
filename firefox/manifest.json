@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Google Account Switcher",
-  "version": "1.0",
+  "version": "1.1.1",
   "description": "Automatically sets the authuser parameter on Google services to switch between accounts.",
   "browser_specific_settings": {
     "gecko": {
@@ -12,7 +12,14 @@
       }
     }
   },
-  "permissions": ["webRequest", "webRequestBlocking", "storage", "activeTab", "*://*.google.com/*"],
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "activeTab",
+    "*://*.google.com/*",
+    "*://*.cloud.google.com/*"
+  ],
   "background": {
     "scripts": ["background.js"]
   },

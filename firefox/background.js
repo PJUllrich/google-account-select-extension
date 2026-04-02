@@ -8,7 +8,7 @@
  */
 
 const SERVICES = new Set([
-  "calendar", "chat", "contacts", "docs", "drive", "groups",
+  "business", "calendar", "chat", "cloud-console", "contacts", "docs", "drive", "groups",
   "keep", "mail", "maps", "meet", "photos", "sheets", "slides"
 ]);
 
@@ -16,13 +16,14 @@ const IGNORED_HOSTS = ["apis.", "oauth2.", "accounts.", "fonts.", "lh3.", "encry
 const IGNORED_PATHS = ["/recaptcha", "/_/", "/js/", "/css/", "/images/", "/xjs/",
   "/gen_204", "/client_204", "/complete/search", "/sorry/"];
 
-let config = { accounts: [], defaultAccount: null, overrides: {} };
+let config = { accounts: [], defaultAccount: null, overrides: {}, enabled: true };
 
 function loadConfig() {
-  browser.storage.local.get(["accounts", "defaultAccount", "overrides"]).then((d) => {
+  browser.storage.local.get(["accounts", "defaultAccount", "overrides", "enabled"]).then((d) => {
     config.accounts = d.accounts || [];
     config.defaultAccount = d.defaultAccount ?? null;
     config.overrides = d.overrides || {};
+    config.enabled = d.enabled !== false;
   });
 }
 
@@ -93,6 +94,9 @@ async function fetchAccounts() {
 // --- Request interception ---
 
 function detectService(url) {
+  // console.cloud.google.com → "cloud-console"
+  if (url.hostname === "console.cloud.google.com") return "cloud-console";
+
   const sub = url.hostname.split(".")[0];
   if (sub !== "www" && SERVICES.has(sub)) return sub;
 
@@ -103,6 +107,7 @@ function detectService(url) {
 }
 
 function handleRequest(details) {
+  if (!config.enabled) return {};
   if (!config.defaultAccount && Object.keys(config.overrides).length === 0) return {};
 
   const url = new URL(details.url);
@@ -131,6 +136,6 @@ function handleRequest(details) {
 
 browser.webRequest.onBeforeRequest.addListener(
   handleRequest,
-  { urls: ["*://*.google.com/*"], types: ["main_frame"] },
+  { urls: ["*://*.google.com/*", "*://*.cloud.google.com/*"], types: ["main_frame"] },
   ["blocking"]
 );

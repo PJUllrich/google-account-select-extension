@@ -20,6 +20,19 @@ h2 {
 
 section { margin-bottom: 14px; }
 
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.toggle-row span { font-weight: 500; }
+.toggle-row input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
 /* Shared form elements */
 select, input {
   flex: 1;
